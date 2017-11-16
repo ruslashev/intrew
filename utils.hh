@@ -1,17 +1,6 @@
 #pragma once
 
-#include <vector>
-#include <climits>
-#include <cassert>
-#include <cmath>
-#include <iostream>
-
-#define die(...) do { printf(__VA_ARGS__); puts(""); exit(1); } while (0)
-
-typedef long long int ll;
-typedef unsigned long long int ull;
-
-const int neginf = INT_MIN, inf = INT_MAX;
+#include "simple.hh"
 
 typedef std::vector<int> vi;
 typedef std::vector<std::vector<int>> vvi;
@@ -51,9 +40,17 @@ std::vector<T> generate_array_sequence(int size) {
   return out;
 }
 
-template <typename T> void scramble_array(std::vector<T> *array) {
+template <typename T>
+void scramble_array(std::vector<T> *array) {
   for (size_t i = 0; i < array->size(); ++i)
     std::swap((*array)[i], (*array)[rand_in_range(0, array->size() - 1)]);
+}
+
+template <typename T>
+std::vector<T> generate_array_random_unique(int size) {
+  std::vector<T> out = generate_array_sequence<T>(size);
+  scramble_array<T>(&out);
+  return out;
 }
 
 template <typename T>
