@@ -4,7 +4,7 @@
 #include <algorithm>
 
 template <typename T>
-static int merge_inversions(std::vector<T> &A, int p, int q, int r) {
+static int _merge_inversions(std::vector<T> &A, int p, int q, int r) {
   int n1 = q - p + 1, n2 = r - q;
   std::vector<T> L(n1 + 1), R(n2 + 1);
   for (int i = 1; i <= n1; ++i)
@@ -32,18 +32,18 @@ static int merge_inversions(std::vector<T> &A, int p, int q, int r) {
 }
 
 template <typename T>
-static int count_inversions(std::vector<T> &A, int p, int r) {
+static int _count_inversions(std::vector<T> &A, int p, int r) {
   int count = 0;
   if (p < r) {
     int q = (p + r) / 2;
-    count = count_inversions(A, p, q) + count_inversions(A, q + 1, r)
-      + merge_inversions(A, p, q, r);
+    count = _count_inversions(A, p, q) + _count_inversions(A, q + 1, r)
+      + _merge_inversions(A, p, q, r);
   }
   return count;
 }
 
 template <typename T>
 int count_inversions(std::vector<T> &A) {
-  return count_inversions(A, 1, A.size());
+  return _count_inversions(A, 1, A.size());
 }
 

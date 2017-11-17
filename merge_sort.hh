@@ -4,7 +4,7 @@
 
 // warning: uses 'inf' even though vector elements are templated
 template <typename T>
-static void merge_unused(std::vector<T> *A, int p, int q, int r) {
+static void _merge_unused(std::vector<T> *A, int p, int q, int r) {
   int n1 = q - p + 1, n2 = r - q;
   std::vector<T> L(n1 + 1), R(n2 + 1);
   for (int i = 1; i <= n1; ++i)
@@ -25,7 +25,7 @@ static void merge_unused(std::vector<T> *A, int p, int q, int r) {
 }
 
 template <typename T>
-static void merge(std::vector<T> *A, int p, int q, int r) {
+static void _merge(std::vector<T> *A, int p, int q, int r) {
   int n1 = q - p + 1, n2 = r - q;
   std::vector<T> L(n1), R(n2);
   for (int i = 1; i <= n1; ++i)
@@ -50,17 +50,17 @@ static void merge(std::vector<T> *A, int p, int q, int r) {
 }
 
 template <typename T>
-static void merge_sort(std::vector<T> *A, int p, int r) {
+static void _merge_sort(std::vector<T> *A, int p, int r) {
   if (p < r) {
     int q = (p + r) / 2;
-    merge_sort(A, p, q);
-    merge_sort(A, q + 1, r);
-    merge(A, p, q, r);
+    _merge_sort(A, p, q);
+    _merge_sort(A, q + 1, r);
+    _merge(A, p, q, r);
   }
 }
 
 template <typename T>
 void merge_sort(std::vector<T> *A) {
-  merge_sort(A, 1, A->size());
+  _merge_sort(A, 1, A->size());
 }
 

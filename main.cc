@@ -1,8 +1,12 @@
-#include "count_inversions.hh"
+#include "maximum_subarray.hh"
 #include "utils.hh"
 
 int main() {
-  vi a = { 8, 4, 3, 2, 1};
-  printf("count_inversions(a)=%d\n", count_inversions(a));
+  for (int i = 0; i < 2e2; ++i) {
+    vi a = generate_array_random<int>(1e5, -1e3, 1e3);
+    subarray_t x = find_maximum_subarray_dc(a)
+      , y = find_maximum_subarray(a);
+    assert(x.sum == y.sum);
+  }
 }
 
