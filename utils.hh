@@ -62,6 +62,24 @@ void print_vector(const std::vector<T> &array) {
   std::cout << "]" << std::endl;
 }
 
+template <typename T>
+T vector_max(const std::vector<T> &array) {
+  T max = array[0];
+  for (int i = 1; i < (int)array.size(); ++i)
+    if (array[i] > max)
+      max = array[i];
+  return max;
+}
+
+template <typename T>
+T vector_min(const std::vector<T> &array) {
+  T min = array[0];
+  for (int i = 1; i < (int)array.size(); ++i)
+    if (array[i] < min)
+      min = array[i];
+  return min;
+}
+
 #define time_execution(X) \
   do { \
     auto begin = std::chrono::high_resolution_clock::now(); \
