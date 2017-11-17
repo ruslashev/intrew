@@ -27,13 +27,11 @@ static void merge_unused(std::vector<T> *A, int p, int q, int r) {
 template <typename T>
 static void merge(std::vector<T> *A, int p, int q, int r) {
   int n1 = q - p + 1, n2 = r - q;
-  std::vector<T> L(n1 + 1), R(n2 + 1);
+  std::vector<T> L(n1), R(n2);
   for (int i = 1; i <= n1; ++i)
     L[i - 1] = (*A)[p + i - 2];
   for (int j = 1; j <= n2; ++j)
     R[j - 1] = (*A)[q + j - 1];
-  L[n1] = inf;
-  R[n2] = inf;
   int i = 1, j = 1, k = p;
   while (i <= n1 && j <= n2) {
     if (L[i - 1] <= R[j - 1]) {

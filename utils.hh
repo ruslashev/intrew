@@ -1,5 +1,6 @@
 #pragma once
 
+#include <chrono>
 #include "simple.hh"
 
 typedef std::vector<int> vi;
@@ -60,4 +61,13 @@ void print_vector(const std::vector<T> &array) {
     std::cout << array[i] << (i != array.size() - 1 ? " " : "");
   std::cout << "]" << std::endl;
 }
+
+#define time_execution(X) \
+  do { \
+    auto begin = std::chrono::high_resolution_clock::now(); \
+    X; \
+    auto end = std::chrono::high_resolution_clock::now(); \
+    std::chrono::duration<double, std::micro> duration = end - begin; \
+    printf("%s: %f us\n", #X, duration.count()); \
+  } while (0)
 
