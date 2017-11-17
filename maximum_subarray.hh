@@ -55,7 +55,7 @@ subarray_t find_maximum_subarray(std::vector<T> &A) {
       max_start_so_far = 1, max_end_so_far = 1;
   for (size_t i = 2; i <= A.size(); ++i) {
     int v = A[i - 1];
-    if (v > max_sum_ending_here + v) {
+    if (max_sum_ending_here < 0) {
       max_sum_ending_here = v;
       max_start_here = i;
       max_end_here = i;

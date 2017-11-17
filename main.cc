@@ -2,11 +2,11 @@
 #include "utils.hh"
 
 int main() {
-  for (int i = 0; i < 2e2; ++i) {
-    vi a = generate_array_random<int>(1e5, -1e3, 1e3);
-    subarray_t x = find_maximum_subarray_dc(a)
-      , y = find_maximum_subarray(a);
-    assert(x.sum == y.sum);
-  }
+  vi a = generate_array_random_walk<int>(20, -4, 4);
+  print_vector(a);
+  subarray_t x = find_maximum_subarray(a);
+  printf("x.start=%d, x.end=%d, x.sum=%d\n", x.start, x.end, x.sum);
+  for (int i = x.start; i < x.end; ++i)
+    printf("%d%s", a[i], (i == x.end - 1) ? "\n" : " ");
 }
 
