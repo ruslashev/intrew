@@ -1,12 +1,8 @@
-#include "binary_search.hh"
+#include "num_inversions.hh"
 #include "utils.hh"
 
 int main() {
-  vi a = generate_array_sequence<int>(20);
-  print_vector(a);
-  bool found = 0;
-  int idx = 0;
-  binary_search(a, 5, &found, &idx);
-  printf("found=%d, idx=%d\n", found, idx);
+  vi a = { 8, 4, 3, 2, 1};
+  printf("num_inversions(a)=%d\n", num_inversions(a));
 }
 
