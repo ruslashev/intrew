@@ -17,3 +17,7 @@ struct subarray_t {
   int start, end, sum;
 };
 
+struct interval_t {
+  int left, right;
+};
+
