@@ -13,3 +13,7 @@ typedef unsigned long long int ull;
 
 const int neginf = INT_MIN, inf = INT_MAX;
 
+struct subarray_t {
+  int start, end, sum;
+};
+
