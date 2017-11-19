@@ -65,9 +65,8 @@ void print_vector(const std::vector<T> &array) {
 template <typename T>
 T vector_max(const std::vector<T> &array) {
   T max = array[0];
-  for (int i = 1; i < (int)array.size(); ++i)
-    if (array[i] > max)
-      max = array[i];
+  for (size_t i = 1; i < array.size(); ++i)
+    max = std::max(max, array[i]);
   return max;
 }
 
@@ -75,8 +74,7 @@ template <typename T>
 T vector_min(const std::vector<T> &array) {
   T min = array[0];
   for (int i = 1; i < (int)array.size(); ++i)
-    if (array[i] < min)
-      min = array[i];
+    min = std::min(min, array[i]);
   return min;
 }
 
