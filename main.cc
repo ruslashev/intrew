@@ -1,10 +1,11 @@
-#include "heapsort.hh"
 #include "utils.hh"
+#include "select.hh"
+#include <algorithm>
 
 int main() {
-  vi a = generate_array_random_walk<int>(20, -4, 4);
+  vi a = generate_array_random_unique<int>(100);
   print_vector(a);
-  heapsort(&a);
-  print_vector(a);
+  for (int i = 1; i <= 100; ++i)
+    assert(select(a, i) == i);
 }
 
