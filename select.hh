@@ -3,9 +3,9 @@
 #include "simple.hh"
 
 template <typename T>
-static int _median5(std::vector<T> &A, size_t p, size_t r) {
+static T _median5(std::vector<T> &A, size_t p, size_t r) {
   for (size_t j = p; j <= r; ++j) {
-    int key = A[j - 1];
+    T key = A[j - 1];
     size_t i = j - 1;
     while (i >= p && key < A[i - 1]) {
       A[i] = A[i - 1];
@@ -18,7 +18,7 @@ static int _median5(std::vector<T> &A, size_t p, size_t r) {
 }
 
 template <typename T>
-static int _select(std::vector<T> &A, size_t p, size_t r, size_t i) {
+static T _select(std::vector<T> &A, size_t p, size_t r, size_t i) {
   size_t n = r - p + 1, j;
   std::vector<T> medians((n + 4) / 5);
   for (j = 1; j <= n / 5; ++j)
@@ -26,7 +26,7 @@ static int _select(std::vector<T> &A, size_t p, size_t r, size_t i) {
   if (n % 5 != 0)
     medians[j - 1] = _median5(A, p + (j - 1) * 5, p + (j - 1) * 5 + n % 5 - 1);
 
-  int x = medians.size() == 1 ? medians[0]
+  T x = medians.size() == 1 ? medians[0]
     : _select(medians, 1, medians.size(), medians.size() / 2);
 
   size_t k = 0;
@@ -45,7 +45,7 @@ static int _select(std::vector<T> &A, size_t p, size_t r, size_t i) {
 }
 
 template <typename T>
-int select(std::vector<T> A, size_t i) {
+T select(std::vector<T> A, size_t i) {
   return _select(A, 1, A.size(), i);
 }
 
