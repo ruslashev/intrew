@@ -12,6 +12,8 @@ typedef long long int ll;
 typedef unsigned long long int ull;
 typedef vector<int> v;
 typedef vector<vector<int>> vv;
+#define repi(i,a,b) for (int i = a; i <= b; ++i)
+#define repx(i,a,b) for (int i = a; i < b; ++i)
 
 const int neginf = INT_MIN, inf = INT_MAX;
 
