@@ -3,9 +3,6 @@
 #include <chrono>
 #include "simple.hh"
 
-typedef std::vector<int> vi;
-typedef std::vector<std::vector<int>> vvi;
-
 void seed() {
   srand(time(nullptr));
 }
@@ -84,6 +81,6 @@ T vector_min(const std::vector<T> &array) {
     X; \
     auto end = std::chrono::high_resolution_clock::now(); \
     std::chrono::duration<double, std::micro> duration = end - begin; \
-    printf("%s: %f us\n", #X, duration.count()); \
+    printf("%s: %fus (%fms)\n", #X, duration.count(), duration.count() / 1000.); \
   } while (0)
 

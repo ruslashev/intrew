@@ -1,17 +1,17 @@
 #pragma once
 
 #include <vector>
+#include <map>
 #include <climits>
 #include <cassert>
 #include <cmath>
 #include <iostream>
 
 using namespace std;
-
-#define die(...) do { printf(__VA_ARGS__); puts(""); exit(1); } while (0)
-
 typedef long long int ll;
 typedef unsigned long long int ull;
+typedef vector<int> v;
+typedef vector<vector<int>> vv;
 
 const int neginf = INT_MIN, inf = INT_MAX;
 
@@ -22,4 +22,6 @@ struct subarray_t {
 struct interval_t {
   int left, right;
 };
+
+#define die(...) do { printf(__VA_ARGS__); puts(""); exit(1); } while (0)
 
