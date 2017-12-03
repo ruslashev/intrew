@@ -6,6 +6,8 @@
 #include <cmath>
 #include <iostream>
 
+using namespace std;
+
 #define die(...) do { printf(__VA_ARGS__); puts(""); exit(1); } while (0)
 
 typedef long long int ll;

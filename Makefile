@@ -4,7 +4,12 @@ warnings = -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable \
 		   -Wsuggest-override -Wlogical-op -Wtrampolines -Wfloat-equal
 flags = -ggdb3 -Og -std=c++0x -fno-rtti -fno-exceptions
 
-default:
+o:
+	@echo Compiling main.cc to main
+	@g++ main.cc $(flags) $(warnings) -o main
+	echo "4 1 1 2 1" | ./main
+
+all:
 	@echo Compiling main.cc to main
 	@g++ main.cc $(flags) $(warnings) -o main
 	@./main
