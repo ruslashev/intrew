@@ -8,10 +8,14 @@
 #include <iostream>
 
 using namespace std;
+
 typedef long long int ll;
 typedef unsigned long long int ull;
+
 typedef vector<int> v;
 typedef vector<vector<int>> vv;
+typedef vector<ull> vu;
+
 #define repi(i,a,b) for (int i = a; i <= b; ++i)
 #define repx(i,a,b) for (int i = a; i < b; ++i)
 
