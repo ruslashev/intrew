@@ -7,7 +7,7 @@ flags = -ggdb3 -Og -std=c++0x -fno-rtti -fno-exceptions
 o:
 	@echo Compiling main.cc to main
 	@g++ main.cc $(flags) $(warnings) -o main
-	echo "1 10" | ./main
+	cat test_case | ./main
 
 all:
 	@echo Compiling main.cc to main
