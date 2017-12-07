@@ -38,8 +38,8 @@ int main() {
 
     for (auto it = lengths.begin(); it != lengths.end(); ++it) {
       const pair_t p = it->first;
-      // if (p == pf)
-      //   continue;
+      if (p == pf)
+        continue;
       const set<ul> c = it->second.first;
       int s = it->second.second;
       bool di2 = doesnt_include(c, v2), di1 = doesnt_include(c, v1);
