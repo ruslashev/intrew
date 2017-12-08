@@ -1,18 +1,21 @@
-#include "utils.hh"
-#include "simple.hh"
 #include <map>
+#include <iostream>
+
+using namespace std;
 
 int main() {
-  int n, numz = 0;
-  std::map<int, int> occ;
+  int n;
+  map<int, int> occ;
   cin >> n;
   for (int i = 0; i < n; ++i) {
     int x;
     cin >> x;
     ++occ[x];
-    if (occ.at(x) > 2)
-      ++numz;
   }
-  printf("numz=%d\n", numz);
+  int numz = 0;
+  for (auto it = occ.begin(); it != occ.end(); ++it)
+    if (it->second > 2)
+      ++numz;
+  cout << numz << endl;
 }
 

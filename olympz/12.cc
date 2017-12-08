@@ -1,5 +1,7 @@
-#include "simple.hh"
+#include <iostream>
+#include <map>
 #include <set>
+using namespace std;
 
 typedef unsigned long long ull;
 typedef unsigned long ul;

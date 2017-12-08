@@ -1,6 +1,7 @@
-#include "matrix_mult.hh"
-#include "utils.hh"
-#include "simple.hh"
+#include <iostream>
+
+using namespace std;
+typedef unsigned long long int ull;
 
 double sat(double n, double s) {
   return n * n * n + 5. * n - 6. * s;
