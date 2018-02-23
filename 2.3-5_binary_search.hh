@@ -3,12 +3,12 @@
 
 template <typename T>
 bool binary_search(const vector<T> &a, T needle) {
-  size_t beg = 0, end = a.size() - 1;
+  int beg = 0, end = a.size() - 1;
   while (beg <= end) {
-    size_t mid = (beg + end) / 2;
-    if (a[mid] < needle)
+    int mid = (beg + end) / 2;
+    if (needle < a[mid])
       end = mid - 1;
-    else if (a[mid] > needle)
+    else if (needle > a[mid])
       beg = mid + 1;
     else
       return true;
