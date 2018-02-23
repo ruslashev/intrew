@@ -78,11 +78,13 @@ std::vector<T> generate_vector_random_unique(int size) {
 }
 
 template <typename T>
-void print_vector(const std::vector<T> &vector) {
+void print_vector(const std::vector<T> &vector, bool newline = true) {
   std::cout << "[";
   for (size_t i = 0; i < vector.size(); ++i)
     std::cout << vector[i] << (i != vector.size() - 1 ? " " : "");
-  std::cout << "]" << std::endl;
+  std::cout << "]";
+  if (newline)
+    std::cout << std::endl;
 }
 
 template <typename T>
