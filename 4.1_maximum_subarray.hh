@@ -53,3 +53,22 @@ subarray_t<T> find_max_subarray(const vector<T> &a) {
   return find_max_subarray(a, 0, a.size() - 1);
 }
 
+template <typename T>
+subarray_t<T> find_max_subarray_brute(const vector<T> &a, size_t beg, size_t end) {
+  subarray_t<T> max = { beg, beg, a[beg] };
+  for (size_t i = beg; i <= end; ++i) {
+    T sum = 0;
+    for (size_t j = i; j <= end; ++j) {
+      sum += a[j];
+      if (sum > max.sum)
+        max = { i, j, sum };
+    }
+  }
+  return max;
+}
+
+template <typename T>
+subarray_t<T> find_max_subarray_brute(const vector<T> &a) {
+  return find_max_subarray_brute(a, 0, a.size() - 1);
+}
+
