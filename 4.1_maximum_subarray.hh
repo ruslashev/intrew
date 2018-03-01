@@ -72,3 +72,21 @@ subarray_t<T> find_max_subarray_brute(const vector<T> &a) {
   return find_max_subarray_brute(a, 0, a.size() - 1);
 }
 
+template <typename T>
+subarray_t<T> find_max_subarray_linear(const vector<T> &a) {
+  size_t beg = 0, end = 0;
+  T w = a[0], max_sum = a[0];
+  for (size_t i = 1; i < a.size(); ++i) {
+    if (a[i] > w + a[i]) { // can be simplifed to `if (w < 0)' but retains meaning now
+      beg = end = i;
+      w = a[i];
+    } else
+      w += a[i];
+    if (w > max_sum) {
+      max_sum = w;
+      end = i;
+    }
+  }
+  return { beg, end, max_sum };
+}
+
