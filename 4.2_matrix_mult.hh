@@ -32,12 +32,16 @@ vector<vector<T>> mat_sub(const vector<vector<T>> &a, const vector<vector<T>> &b
   return c;
 }
 
+// only works for square matrices with power of 2 dimensions
 template <typename T>
 vector<vector<T>> mat_mult_strassen(const vector<vector<T>> &a, const vector<vector<T>> &b) {
   size_t n = a.size();
-  vector<vector<T>> c(n, vector<T>(n, 0)), a11, a12, a21, a22, b11, b12, b21,
-    b22, c11, c12, c21, c22, s1, s2, s3, s4, s5, s6, s7, s8, s9, s10, p1, p2, p3, p4, p5, p6, p7;
-  c11 = c12 = c21 = c22 = c;
+  vector<vector<T>> zero(n, vector<T>(n, 0)), zerohalf(n / 2, vector<T>(n / 2, 0)),
+    c, a11, a12, a21, a22, b11, b12, b21, b22, c11, c12, c21, c22, s1, s2, s3,
+    s4, s5, s6, s7, s8, s9, s10, p1, p2, p3, p4, p5, p6, p7;
+
+  c = zero;
+  a11 = a12 = a21 = a22 = b11 = b12 = b21 = b22 = zerohalf;
 
   if (n == 2)
     return mat_mult_naive(a, b);
@@ -53,16 +57,16 @@ vector<vector<T>> mat_mult_strassen(const vector<vector<T>> &a, const vector<vec
       b22[i][j] = b[i + n / 2][j + n / 2];
     }
 
-  s1 =  mat_sub(a11, a11);
-  s2 =  mat_add(a11, a11);
-  s3 =  mat_add(a11, a11);
-  s4 =  mat_sub(a11, a11);
-  s5 =  mat_add(a11, a11);
-  s6 =  mat_add(a11, a11);
-  s7 =  mat_sub(a11, a11);
-  s8 =  mat_add(a11, a11);
-  s9 =  mat_sub(a11, a11);
-  s10 = mat_add(a11, a11);
+  s1 =  mat_sub(b12, b22);
+  s2 =  mat_add(a11, a12);
+  s3 =  mat_add(a21, a22);
+  s4 =  mat_sub(b21, b11);
+  s5 =  mat_add(a11, a22);
+  s6 =  mat_add(b11, b22);
+  s7 =  mat_sub(a12, a22);
+  s8 =  mat_add(b21, b22);
+  s9 =  mat_sub(a11, a21);
+  s10 = mat_add(b11, b12);
 
   p1 = mat_mult_strassen(a11, s1);
   p2 = mat_mult_strassen(s2, b22);
