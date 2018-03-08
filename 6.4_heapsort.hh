@@ -40,10 +40,32 @@ void max_heapify(vector<T> &a, size_t heap_size, size_t i) {
 }
 
 template <typename T>
+void min_heapify(vector<T> &a, size_t heap_size, size_t i) {
+  while (i < heap_size) {
+    size_t l = left(i), r = right(i)
+      , smallest = (l < heap_size && a[l] < a[i]) ? l : i;
+    if (r < heap_size && a[r] < a[smallest])
+      smallest = r;
+    if (smallest == i)
+      break;
+    std::swap(a[i], a[smallest]);
+    i = smallest;
+  }
+}
+
+template <typename T>
 size_t build_max_heap(vector<T> &a) {
   size_t heap_size = a.size();
   for (int i = heap_size / 2; i >= 0; --i)
     max_heapify(a, heap_size, i);
+  return heap_size;
+}
+
+template <typename T>
+size_t build_min_heap(vector<T> &a) {
+  size_t heap_size = a.size();
+  for (int i = heap_size / 2; i >= 0; --i)
+    min_heapify(a, heap_size, i);
   return heap_size;
 }
 
@@ -92,6 +114,47 @@ size_t max_heap_insert(vector<T> &a, size_t heap_size, T key) {
   size_t i = heap_size - 1;
   a.push_back(key);
   while (i > 0 && a[parent(i)] < a[i]) {
+    std::swap(a[i], a[parent(i)]);
+    i = parent(i);
+  }
+  return heap_size;
+}
+
+// min-priority queue algorithms
+
+template <typename T>
+T heap_minimum(const vector<T> &a) {
+  return a[0];
+}
+
+template <typename T>
+T heap_extract_min(vector<T> &a, size_t &heap_size) {
+  if (heap_size < 1)
+    throw;
+  T min = a[0];
+  a[0] = a[heap_size - 1];
+  --heap_size;
+  min_heapify(a, 0);
+  return min;
+}
+
+template <typename T>
+void heap_decrease_key(vector<T> &a, size_t i, T key) {
+  if (key > a[i])
+    throw;
+  a[i] = key;
+  while (i > 0 && a[parent(i)] > a[i]) {
+    std::swap(a[i], a[parent(i)]);
+    i = parent(i);
+  }
+}
+
+template <typename T>
+size_t min_heap_insert(vector<T> &a, size_t heap_size, T key) {
+  ++heap_size;
+  size_t i = heap_size - 1;
+  a.push_back(key);
+  while (i > 0 && a[parent(i)] > a[i]) {
     std::swap(a[i], a[parent(i)]);
     i = parent(i);
   }
