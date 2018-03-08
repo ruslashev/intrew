@@ -1,6 +1,10 @@
 #pragma once
 #include "util.hh"
 
+size_t parent(size_t i) {
+  return i / 2;
+}
+
 size_t left(size_t i) {
   return 2 * i;
 }
@@ -51,5 +55,46 @@ void heapsort(vector<T> &a) {
     --heap_size;
     max_heapify(a, heap_size, 0);
   }
+}
+
+// max-priority queue algorithms
+
+template <typename T>
+T heap_maximum(const vector<T> &a) {
+  return a[0];
+}
+
+template <typename T>
+T heap_extract_max(vector<T> &a, size_t &heap_size) {
+  if (heap_size < 1)
+    throw;
+  T max = a[0];
+  a[0] = a[heap_size - 1];
+  --heap_size;
+  max_heapify(a, 0);
+  return max;
+}
+
+template <typename T>
+void heap_increase_key(vector<T> &a, size_t i, T key) {
+  if (key < a[i])
+    throw;
+  a[i] = key;
+  while (i > 0 && a[parent(i)] < a[i]) {
+    std::swap(a[i], a[parent(i)]);
+    i = parent(i);
+  }
+}
+
+template <typename T>
+size_t max_heap_insert(vector<T> &a, size_t heap_size, T key) {
+  ++heap_size;
+  size_t i = heap_size - 1;
+  a.push_back(key);
+  while (i > 0 && a[parent(i)] < a[i]) {
+    std::swap(a[i], a[parent(i)]);
+    i = parent(i);
+  }
+  return heap_size;
 }
 
