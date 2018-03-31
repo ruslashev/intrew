@@ -1,9 +1,7 @@
-#include "7.1_quicksort.hh"
+#include "9.3_select.hh"
 
 int main() {
-  vector<int> a = generate_vector_random_unique<int>(9);
-  print_vector(a);
-  quicksort_hoare(a);
-  print_vector(a);
+  vector<int> a = generate_vector_random_unique<int>(130);
+  printf("select(a, 99)=%d\n", select(a, 99));
 }
 
