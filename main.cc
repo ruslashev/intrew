@@ -1,7 +1,14 @@
-#include "9.3_select.hh"
+#include "bst.hh"
 
 int main() {
-  vector<int> a = generate_vector_random_unique<int>(130);
-  printf("select(a, 99)=%d\n", select(a, 99));
+  bst<int> b;
+  b.insert(10);
+  b.insert(8);
+  b.insert(12);
+  b.insert(4);
+  b.insert(9);
+  b.insert(13);
+  b.insert(14);
+  b.pre_order(b.root);
 }
 
