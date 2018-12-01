@@ -1,8 +1,10 @@
-warnings = -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable \
-           -Wduplicated-cond -Wduplicated-branches -Wdouble-promotion \
-           -Wnull-dereference -Wformat=2 -Wdisabled-optimization \
-           -Wsuggest-override -Wlogical-op -Wtrampolines -Wfloat-equal
-flags = -ggdb3 -O2 -std=c++14 -fno-rtti -fno-exceptions
+warnings = -Wall -Wextra -Wno-unused-parameter -Wno-unused-variable
+flags = -g -O2
+
+c:
+	@echo Compiling main.cc to main
+	@g++ main.c $(flags) $(warnings) -o main
+	./main
 
 all:
 	@echo Compiling main.cc to main
