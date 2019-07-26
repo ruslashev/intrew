@@ -1,9 +1,6 @@
 #pragma once
 
-#include <stdio.h>
-#include <stdlib.h>
-
-#define die(...) do { printf(__VA_ARGS__); puts(""); exit(1); } while (0)
+#include "common.h"
 
 int parent(int i)
 {
@@ -18,13 +15,6 @@ int left_child(int i)
 int right_child(int i)
 {
     return 2 * i + 1;
-}
-
-void swap(int *x, int *y)
-{
-    int t = *x;
-    *x = *y;
-    *y = t;
 }
 
 void maintain_heap_prop_for_element(int *a, int h, int i)

@@ -1,18 +1,11 @@
 #pragma once
 
-#include <limits.h>
-
-const int neginf = INT_MIN;
+#include "common.h"
 
 struct subarray
 {
     int start, end, sum;
 };
-
-int max(int x, int y)
-{
-    return (x > y) ? x : y;
-}
 
 int max_subarray_crossing_midpoint(int *a, int l, int m, int h)
 {
