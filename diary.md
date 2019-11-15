@@ -615,3 +615,51 @@ void* avl_tree_find(struct avl_tree_t *tree, int key)
 }
 ```
 
+#### always sorted array
+
+```
+int a[max];
+int len = 0;
+
+void add(int x)
+{
+    int i;
+
+    for (i = len - 1; i >= 0 && a[i] > x; i--)
+        a[i + 1] = a[i];
+
+    a[i + 1] = x;
+
+    ++len;
+}
+
+int bsearch(int l, int h, int key)
+{
+    if (h < l)
+        return -1;
+
+    int mid = l + (h - l) / 2;
+
+    if (key == a[mid])
+        return mid;
+
+    if (key > a[mid])
+        return bsearch(mid + 1, h, key);
+
+    return bsearch(l, mid - 1, key);
+}
+
+void delete(int x)
+{
+    int pos = bsearch(0, len - 1, x);
+
+    if (pos == -1)
+        return;
+
+    for (int i = pos; i < len - 1; i++)
+        a[i] = a[i + 1];
+
+    --len;
+}
+```
+
