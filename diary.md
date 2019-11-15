@@ -323,40 +323,42 @@ void heapsort(int *a, int n)
 #### quicksort
 
 ```
-int partition_hoare(int *a, int l, int h)
+int partition(int *a, int l, int h)
 {
-    int i = l - 1, j = h + 1;
+    int pivot = a[l], i = l - 1, j = h + 1, t;
 
     while (1) {
         do {
-            --j;
-        } while (!(a[j] <= a[l]));
+            ++i;
+        } while (a[i] < pivot);
 
         do {
-            i++;
-        } while (!(a[i] >= a[l]));
+            --j;
+        } while (a[j] > pivot);
 
-        if (i < j)
-            swap(&a[i], &a[j]);
-        else
+        if (i >= j)
             return j;
+
+        t = a[i];
+        a[i] = a[j];
+        a[j] = t;
     }
 }
 
-void quicksort_hoare(int *a, int l, int h)
+void quicksort(int *a, int l, int h)
 {
     if (l >= h)
         return;
 
-    int m = partition_hoare(a, l, h);
+    int m = partition(a, l, h);
 
-    quicksort_hoare(a, l, m);
-    quicksort_hoare(a, m + 1, h);
+    quicksort(a, l, m);
+    quicksort(a, m + 1, h);
 }
 
-void quicksort(int *a, int len)
+void quicksort_full(int *a, int len)
 {
-    quicksort_hoare(a, 0, len - 1);
+    quicksort(a, 0, len - 1);
 }
 ```
 
