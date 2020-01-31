@@ -2,28 +2,39 @@
 
 #include "common.h"
 
-void counting_sort_aux(int *a, int len, int k)
+static void counting_sort_aux(int *a, int len, int min, int max)
 {
-    int output[len], c[k + 1];
+    int range = max - min + 1, c[range];
 
-    int_bzero(c, k + 1);
+    int_bzero(c, range);
 
-    for (int i = 0; i < len; ++i)
-        ++c[a[i] - 1];
+    for (int i = 0; i < len; i++)
+        ++c[a[i] - min];
 
-    for (int i = 0; i < k; ++i)
-        c[i] += c[i - 1];
+    for (int i = min, z = 0; i <= max; ++i)
+        for (int j = 0; j < c[i - min]; ++j)
+            a[z++] = i;
+}
 
-    for (int i = len; i >= 1; --i) {
-        output[c[a[i - 1] - 1] - 1] = a[i - 1];
-        --c[a[i - 1] - 1];
+static void find_min_max(int *a, int len, int *min, int *max)
+{
+    *min = *max = a[0];
+
+    for (int i = 1; i < len; ++i) {
+        if (a[i] < *min)
+            *min = a[i];
+
+        if (a[i] > *max)
+            *max = a[i];
     }
-
-    memmove(a, output, len);
 }
 
 void counting_sort(int *a, int len)
 {
-    counting_sort_aux(a, len, array_max(a, len));
+    int min, max;
+
+    find_min_max(a, len, &min, &max);
+
+    counting_sort_aux(a, len, min, max);
 }
 
