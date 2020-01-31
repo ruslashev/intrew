@@ -2,97 +2,123 @@
 
 #include "common.h"
 
-int parent(int i)
+typedef struct
 {
-    return i / 2;
+    int value;
+} item;
+
+typedef struct
+{
+    int size;
+    item *data;
+} heap;
+
+int item_has_less_priority_exp(const item *x, const item *y)
+{
+    return x->value < y->value;
 }
 
-int left_child(int i)
+int item_has_less_priority(heap *h, int xidx, int yidx)
 {
-    return 2 * i;
+    return item_has_less_priority_exp(&h->data[xidx], &h->data[yidx]);
 }
 
-int right_child(int i)
+void item_swap(item *x, item *y)
 {
-    return 2 * i + 1;
+    item t;
+
+    t.value = x->value;
+    x->value = y->value;
+    y->value = t.value;
 }
 
-void maintain_heap_prop_for_element(int *a, int h, int i)
+void heap_init(heap *h, item *storage)
 {
-    int lc, rc, largest;
+    h->size = 0;
+    h->data = storage;
+}
 
-    while (i < h) {
-        lc = left_child(i);
-        rc = right_child(i);
+int heap_parent(int idx)
+{
+    return idx / 2;
+}
 
-        largest = (lc < h && a[lc] > a[i]) ? lc : i;
+int heap_left_child(int idx)
+{
+    return 2 * idx;
+}
 
-        if (rc < h && a[rc] > a[largest])
-            largest = rc;
+int heap_right_child(int idx)
+{
+    return 2 * idx + 1;
+}
 
-        if (largest == i)
+void heap_sift_down(heap *h, int i)
+{
+    int l, r, highest_priority;
+
+    while (i < h->size) {
+        l = heap_left_child(i);
+        r = heap_right_child(i);
+
+        highest_priority = (l < h->size && item_has_less_priority(h, i, l)) ? l : i;
+
+        if (r < h->size && item_has_less_priority(h, highest_priority, r))
+            highest_priority = r;
+
+        if (highest_priority == i)
             break;
 
-        swap(&a[i], &a[largest]);
+        item_swap(&h->data[i], &h->data[highest_priority]);
 
-        i = largest;
+        i = highest_priority;
     }
 }
 
-void build_max_heap(int *a, int n)
+void heap_sift_up(heap *h, int i)
+{
+    while (i > 0 && item_has_less_priority(h, heap_parent(i), i)) {
+        item_swap(&h->data[i], &h->data[heap_parent(i)]);
+
+        i = heap_parent(i);
+    }
+}
+
+void heap_increse_key_priority(heap *h, int i, int newvalue)
+{
+    h->data[i].value = newvalue;
+
+    heap_sift_up(h, i);
+}
+
+void heap_insert(heap *h, int value)
+{
+    ++h->size;
+
+    heap_increse_key_priority(h, h->size - 1, value);
+}
+
+void heap_remove(heap *h, int idx)
+{
+    h->data[idx] = h->data[h->size - 1];
+    --h->size;
+
+    if (idx == 0) {
+        heap_sift_down(h, idx);
+        return;
+    }
+
+    if (item_has_less_priority(h, heap_parent(idx), idx))
+        heap_sift_up(h, idx);
+    else
+        heap_sift_down(h, idx);
+}
+
+#if 0
+void heap_create(int *a, int n)
 {
     for (int i = n / 2; i >= 0; --i)
-        maintain_heap_prop_for_element(a, n, i);
-}
-
-int heap_maximum(int *a)
-{
-    return a[0];
-}
-
-int heap_extract_max(int *a, int n, int *h)
-{
-    if (*h < 1)
-        die("heap underflow");
-
-    int max = a[0];
-
-    a[0] = a[*h - 1];
-    *h = *h - 1;
-    maintain_heap_prop_for_element(a, n, 0);
-
-    return max;
-}
-
-void heap_increase_key(int *a, int i, int key)
-{
-    if (key < a[i])
-        return;
-
-    a[i] = key;
-
-    while (i > 0 && a[parent(i)] < a[i]) {
-        swap(&a[i], &a[parent(i)]);
-
-        i = parent(i);
-    }
-}
-
-void max_heap_insert(int *a, int *h, int key)
-{
-    int i;
-
-    *h = *h + 1;
-
-    i = *h - 1;
-
-    a[i] = key;
-
-    while (i > 0 && a[parent(i)] < a[i]) {
-        swap(&a[i], &a[parent(i)]);
-
-        i = parent(i);
-    }
+        heap_sift_down(a, n, i);
 }
 
 void heapsort(int *a, int n)
@@ -108,4 +134,5 @@ void heapsort(int *a, int n)
         maintain_heap_prop_for_element(a, heap_size, 0);
     }
 }
+#endif
 
