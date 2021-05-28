@@ -1,6 +1,6 @@
 #### common.h
 
-```
+``` c
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -61,7 +61,7 @@ int array_max(const int *a, int len)
 
 #### 2.1 insertion sort
 
-```
+``` c
 void insertion_sort(int *a, int len)
 {
     for (int i = 1; i < len; ++i) {
@@ -76,7 +76,7 @@ void insertion_sort(int *a, int len)
 
 #### 2.3.1 merge sort
 
-```
+``` c
 void merge(int *a, int l, int m, int h)
 {
     int ll = m - l + 1, rl = h - m;
@@ -119,7 +119,7 @@ void merge_sort(int *a, int len)
 
 #### 4.1 maximum subarray
 
-```
+``` c
 struct subarray
 {
     int start, end, sum;
@@ -182,7 +182,7 @@ struct subarray max_subarray_linear(int *a, int len)
 
 #### heapsort and priority queue
 
-```
+``` c
 typedef struct
 {
     int size;
@@ -322,7 +322,7 @@ void heapsort(int *a, int n)
 
 #### quicksort
 
-```
+``` c
 int partition(int *a, int l, int h)
 {
     int pivot = a[l], i = l - 1, j = h + 1, t;
@@ -364,7 +364,7 @@ void quicksort_full(int *a, int len)
 
 #### counting sort
 
-```
+``` c
 void counting_sort_aux(int *a, int len, int k)
 {
     int output[len], c[k + 1];
@@ -393,7 +393,7 @@ void counting_sort(int *a, int len)
 
 #### avl tree
 
-```
+``` c
 struct avl_node_t
 {
     int key;
@@ -617,7 +617,7 @@ void* avl_tree_find(struct avl_tree_t *tree, int key)
 
 #### always sorted array
 
-```
+``` c
 int a[max];
 int len = 0;
 
