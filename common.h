@@ -36,7 +36,7 @@ static int is_sorted(const int *a, int len)
 {
     for (int i = 0; i < len; ++i)
         for (int j = 0; j < i; ++j)
-            if (a[j] >= a[i])
+            if (a[j] > a[i])
                 return 0;
 
     return 1;
@@ -55,5 +55,13 @@ static int array_max(const int *a, int len)
         t = max(t, a[i]);
 
     return t;
+}
+
+static void print_array(const int *a, int len)
+{
+    for (int i = 0; i < len; ++i)
+        printf("%d ", a[i]);
+
+    printf("\n");
 }
 

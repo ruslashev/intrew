@@ -1,4 +1,4 @@
-cflags = -Wall -g -Wno-unused-function
+cflags = -Wall -g -Wno-unused-function -fsanitize=address
 
 all:
 	gcc main.c -o main $(cflags)
