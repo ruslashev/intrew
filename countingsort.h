@@ -38,3 +38,30 @@ void counting_sort(int *a, int len)
     counting_sort_aux(a, len, min, max);
 }
 
+static void counting_sort2_aux(int *a, int n, int max_el)
+{
+    int c[max_el + 1],
+        output[n + 1];
+
+    int_bzero(c, max_el + 1);
+
+    for (int i = 0; i < n; ++i)
+        c[a[i]]++;
+
+    for (int i = 1; i <= max_el; ++i)
+        c[i] += c[i - 1];
+
+    for (int i = n - 1; i >= 0; --i) {
+        output[c[a[i]]] = a[i];
+        c[a[i]]--;
+    }
+
+    for (int i = 0; i < n; ++i)
+        a[i] = output[i + 1];
+}
+
+void counting_sort2(int *a, int n)
+{
+    counting_sort_aux(a, n, array_max(a, n));
+}
+

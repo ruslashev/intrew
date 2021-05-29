@@ -365,24 +365,26 @@ void quicksort_full(int *a, int len)
 #### counting sort
 
 ``` c
-void counting_sort_aux(int *a, int len, int k)
+void counting_sort_aux(int *a, int len, int max_el)
 {
-    int output[len], c[k + 1];
+    int c[max_el + 1],
+        output[len + 1];
 
-    int_bzero(c, k + 1);
+    int_bzero(c, max_el + 1);
 
     for (int i = 0; i < len; ++i)
-        ++c[a[i] - 1];
+        c[a[i]]++;
 
-    for (int i = 0; i < k; ++i)
+    for (int i = 1; i <= max_el; ++i)
         c[i] += c[i - 1];
 
-    for (int i = len; i >= 1; --i) {
-        output[c[a[i - 1] - 1] - 1] = a[i - 1];
-        --c[a[i - 1] - 1];
+    for (int i = len - 1; i >= 0; --i) {
+        output[c[a[i]]] = a[i];
+        c[a[i]]--;
     }
 
-    memmove(a, output, len);
+    for (int i = 0; i < len; ++i)
+        a[i] = output[i + 1];
 }
 
 void counting_sort(int *a, int len)
