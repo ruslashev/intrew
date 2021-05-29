@@ -4,7 +4,7 @@
 
 int main()
 {
-    int testcases = 1, arraylen = 5, rangemin = 10, rangemax = 99;
+    int testcases = 1, arraylen = 10, rangemin = 100, rangemax = 999;
 
     sneed();
 
@@ -16,15 +16,11 @@ int main()
         for (int j = 0; j < arraylen; ++j)
             a[j] = rand_in_range(rangemin, rangemax);
 
-        for (int j = 0; j < arraylen; ++j)
-            printf("%d ", a[j]);
-        printf("\n");
+        print_array(a, arraylen);
 
         radix_sort(a, arraylen);
 
-        for (int j = 0; j < arraylen; ++j)
-            printf("%d ", a[j]);
-        printf("\n");
+        print_array(a, arraylen);
 
         if (!is_sorted(a, arraylen))
             die("panic");
